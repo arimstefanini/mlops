@@ -1,4 +1,0 @@
-ipykernel
-pandas
-matplotlib
-lightgbm
