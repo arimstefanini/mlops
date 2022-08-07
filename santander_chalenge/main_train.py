@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     """
     exemple args:
-        python santander_chalenge/main_train.py -d data/train_data/train.csv 
+        python santander_chalenge/main_train.py -d /data/train_data/train.csv 
     """
 
     try:
@@ -36,10 +36,12 @@ if __name__ == "__main__":
 
         cwd = os.getcwd()
 
-        data_path = f'{cwd}/{data_file}'
+        #data_path = f'{cwd}\{data_file}'
+        data_path = 'C:\\Users\\arist\\OneDrive\\Documentos\\GitHub\\serasa-challenge\\data\\train_data\\train.csv'
 
         evaluator = LGBMEvaluator()
-        MLPipeline.evaluator(data_path, evaluator)
+        ml_pipeline = MLPipeline(evaluator)
+        ml_pipeline.run(data_path)
 
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)

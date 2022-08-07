@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 class BuildDataset:
     
     def split_data(file):
-
+        print(file)
         data =  pd.read_csv(file)
         
         train = data.drop(columns=['ID_code'])

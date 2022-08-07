@@ -1,8 +1,9 @@
 from lightgbm import LGBMClassifier
 
-class LGBMEvaluator:
+from train.repositories.evaluator import Evaluator
+class LGBMEvaluator(Evaluator):
     
-    def evaluate(Model):
+    def evaluate(self):
         clf = LGBMClassifier(
                 metric = 'auc',
                 objective = 'binary',
@@ -17,3 +18,5 @@ class LGBMEvaluator:
                 num_leaves = 6,
                 verbose = -1,
             )
+
+        return clf

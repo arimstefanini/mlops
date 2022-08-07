@@ -1,6 +1,6 @@
 from lightgbm import LGBMClassifier
 
-class FitModel:
+class Model:
 
     def fit_model(clf, X_train, y_train):
         
