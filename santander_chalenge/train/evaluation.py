@@ -6,4 +6,8 @@ class Evaluation:
 
         y_pred = model.predict(X_test)
 
-        print('LightGBM Model accuracy score: {0:0.4f}'.format(accuracy_score(y_test, y_pred)))
+        acc = accuracy_score(y_test, y_pred)
+        
+        print(f'LightGBM Model accuracy score: {acc}')
+
+        return y_pred, acc

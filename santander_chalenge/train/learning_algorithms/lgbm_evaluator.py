@@ -1,6 +1,6 @@
 from lightgbm import LGBMClassifier
 
-from train.repositories.evaluator import Evaluator
+from train.repositories.evaluator_repository import Evaluator
 class LGBMEvaluator(Evaluator):
     
     def evaluate(self):

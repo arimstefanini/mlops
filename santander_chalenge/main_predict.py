@@ -2,6 +2,9 @@ import argparse
 import os
 from dotenv import load_dotenv
 import logging
+import pickle
+import pandas as pd
+from mlflow.tracking import MlflowClient
 
 load_dotenv()
 
@@ -31,9 +34,21 @@ if __name__ == "__main__":
 
             verbose = args.verbose
 
-        print(verbose)
+
+        client = MlflowClient()
+
+        tmp_path = client.download_artifacts(run_id="995b4131b4364d33860c645d37316e4d", path='model/model.pkl')
+
+        f = open(tmp_path,'rb')
+
+        model = pickle.load(f)
+
+        test =  pd.read_csv('C:\\Users\\arist\\OneDrive\\Documentos\\GitHub\\serasa-challenge\\data\\test_data\\test.csv')
+        test = test.drop(columns=['ID_code'])
+        a = model.predict(test)
+
+        print(a)
 
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
-    
    

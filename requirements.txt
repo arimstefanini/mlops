@@ -1,6 +1,6 @@
 ipykernel
+python-dotenv
 pandas
 matplotlib
 lightgbm
 mlflow
-python-dotenv

@@ -18,7 +18,7 @@ def get_args():
 if __name__ == "__main__":
 
     logging.basicConfig(level=logging.DEBUG)
-
+    
     """
     exemple args:
         python santander_chalenge/main_train.py -d /data/train_data/train.csv 
@@ -36,8 +36,7 @@ if __name__ == "__main__":
 
         cwd = os.getcwd()
 
-        #data_path = f'{cwd}\{data_file}'
-        data_path = 'C:\\Users\\arist\\OneDrive\\Documentos\\GitHub\\serasa-challenge\\data\\train_data\\train.csv'
+        data_path = f'{cwd}\{data_file}'
 
         evaluator = LGBMEvaluator()
         ml_pipeline = MLPipeline(evaluator)
