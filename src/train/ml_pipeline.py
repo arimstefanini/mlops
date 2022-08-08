@@ -46,3 +46,5 @@ class MLPipeline():
         pickle_config = {"experiment_id":experiment_id,"run_id":best_run_id, "path":'model/model.pkl'}
         with open('./src/pickle_config.json', 'w') as f:
             json.dump(pickle_config, f, ensure_ascii=False, indent=4)
+
+        return pickle_config
