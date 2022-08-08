@@ -52,5 +52,6 @@ Métrica primaria: Quantos clientes acertou nos dados de teste.
 * Análise dos resultos
 * Mlflow
 * Docker
-* CT
-* CI/CD (Git HUb Actions)
+* TC
+* CI/CD
+* Workflow

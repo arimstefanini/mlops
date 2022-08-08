@@ -4,3 +4,4 @@ pandas
 matplotlib
 lightgbm
 mlflow
+pytest==7.1.2

@@ -2,3 +2,4 @@
 __pycache__
 data
 mlruns
+src/pickle_config.json

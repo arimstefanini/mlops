@@ -11,7 +11,7 @@ load_dotenv()
 def get_args():
     parser = argparse.ArgumentParser()
     
-    parser.add_argument('-d', '--data_file', help='an optional argument', required=True)
+    parser.add_argument('-d', '--data_file', help='path train dataset', required=True)
 
     return parser.parse_args()
 
@@ -21,7 +21,8 @@ if __name__ == "__main__":
     
     """
     exemple exec:
-        python src/main_train.py -d /data/train_data/train.csv 
+        python src/main_train.py \
+            -d /data/train_data/train.csv 
     """
 
     try:
@@ -36,7 +37,7 @@ if __name__ == "__main__":
 
         cwd = os.getcwd()
 
-        data_path = f'{cwd}/{data_file}'
+        data_path = f'{cwd}\{data_file}'
 
         evaluator = LGBMEvaluator()
         ml_pipeline = MLPipeline(evaluator)

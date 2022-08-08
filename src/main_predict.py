@@ -1,17 +1,19 @@
 import argparse
 import os
 from dotenv import load_dotenv
+import json
 import logging
-import pickle
-import pandas as pd
-from mlflow.tracking import MlflowClient
+
+from predict.predict_pipeline import PredictPipeline
 
 load_dotenv()
 
 def get_args():
     parser = argparse.ArgumentParser()
     
-    parser.add_argument('-v', '--verbose', help='an optional argument', required=True)
+    parser.add_argument('-d', '--data_file', help='path test dataset', required=True)
+    parser.add_argument('-p', '--pickle_config', help='data mlflow model', required=True)
+    parser.add_argument('-s', '--submisson', help='folder path data sample submission', required=True)
 
     return parser.parse_args()
 
@@ -21,33 +23,33 @@ if __name__ == "__main__":
 
     """
     exemple args:
-        python santander_chalenge/main_train.py -d data/train_data/train.csv 
+        python src/main_predict.py \
+            -d data/test_data/test.csv \
+            -p src/pickle_config.json \
+            -s data/submission_data \
     """
     
     try:
 
         if os.getenv('ENV_LOCAL') == 'local':
-            verbose = os.environ['VERBOSE']
+            data_file = os.environ['DATA_FILE']
+            pickle_config = os.environ['PICKLE_CONFIG']
+            submisson = os.environ['SUBMISSION']
 
         else:
             args = get_args()
 
-            verbose = args.verbose
+            data_file = args.data_file
+            pickle_config = args.pickle_config
+            submisson = args.submisson
 
+        f = open(pickle_config)
+        config = json.load(f)
 
-        client = MlflowClient()
+        cwd = os.getcwd()
+        data_path = f'{cwd}\{data_file}' 
 
-        tmp_path = client.download_artifacts(run_id="995b4131b4364d33860c645d37316e4d", path='model/model.pkl')
-
-        f = open(tmp_path,'rb')
-
-        model = pickle.load(f)
-
-        test =  pd.read_csv('C:\\Users\\arist\\OneDrive\\Documentos\\GitHub\\serasa-challenge\\data\\test_data\\test.csv')
-        test = test.drop(columns=['ID_code'])
-        a = model.predict(test)
-
-        print(a)
+        PredictPipeline.run(config, data_path)
 
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)
