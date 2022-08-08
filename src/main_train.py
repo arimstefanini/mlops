@@ -20,8 +20,8 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     
     """
-    exemple args:
-        python santander_chalenge/main_train.py -d /data/train_data/train.csv 
+    exemple exec:
+        python src/main_train.py -d /data/train_data/train.csv 
     """
 
     try:
@@ -36,7 +36,7 @@ if __name__ == "__main__":
 
         cwd = os.getcwd()
 
-        data_path = f'{cwd}\{data_file}'
+        data_path = f'{cwd}/{data_file}'
 
         evaluator = LGBMEvaluator()
         ml_pipeline = MLPipeline(evaluator)
