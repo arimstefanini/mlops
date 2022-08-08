@@ -11,6 +11,7 @@ from mlflow.models.signature import infer_signature
 experiment_name = 'santander_chalenge'
 mlflow.set_experiment(experiment_name)
 mlflow.lightgbm.autolog()
+
 class MLPipeline():
 
     def __init__(self, evaluator: Evaluator):
@@ -36,8 +37,12 @@ class MLPipeline():
             df = mlflow.search_runs([experiment_id], order_by=["metrics.accuracy DESC"])
             best_run_id = df.loc[0,'run_id']
 
-            pickle_config = {"experiment_id":experiment_id,"run_id":best_run_id, "path":'model/model.pkl'}
-            with open('./src/pickle_config.json', 'w') as f:
-                json.dump(pickle_config, f, ensure_ascii=False, indent=4)
+            self.create_pickle_config(experiment_id, best_run_id)
 
         mlflow.end_run()
+
+    def create_pickle_config(self, experiment_id, best_run_id):
+
+        pickle_config = {"experiment_id":experiment_id,"run_id":best_run_id, "path":'model/model.pkl'}
+        with open('./src/pickle_config.json', 'w') as f:
+            json.dump(pickle_config, f, ensure_ascii=False, indent=4)
