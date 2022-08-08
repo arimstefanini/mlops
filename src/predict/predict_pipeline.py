@@ -4,8 +4,8 @@ import pandas as pd
 from mlflow.tracking import MlflowClient
 
 class PredictPipeline:
-    
-    def run(config, data_path):
+
+    def run(self, config, data_path, submission_path):
 
         client = MlflowClient()
 
@@ -17,6 +17,15 @@ class PredictPipeline:
 
         test =  pd.read_csv(data_path)
         test = test.drop(columns=['ID_code'])
-        a = model.predict(test)
+        predict_santander = model.predict(test)
 
-        print(a)
+        self.create_submission(predict_santander, submission_path)
+
+    def create_submission(self, predict_santander, submission_path):
+
+        sample_submission =  pd.read_csv(f'{submission_path}/sample_submission.csv')
+        sample_submission = pd.DataFrame(sample_submission)
+        
+        my_submission = pd.DataFrame({'ID_code': sample_submission.ID_code, 'target': predict_santander})
+        my_submission.to_csv(f'{submission_path}\submission.csv', index=False)
+

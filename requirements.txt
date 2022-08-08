@@ -2,6 +2,7 @@ ipykernel
 python-dotenv
 pandas
 matplotlib
+great-expectations
 lightgbm
 mlflow
 pytest==7.1.2

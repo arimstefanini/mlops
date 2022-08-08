@@ -48,8 +48,10 @@ if __name__ == "__main__":
 
         cwd = os.getcwd()
         data_path = f'{cwd}\{data_file}' 
+        submission_path = f'{cwd}\{submisson}' 
 
-        PredictPipeline.run(config, data_path)
+        predict_pipeline = PredictPipeline()
+        predict_pipeline.run(config, data_path, submission_path)
 
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)

@@ -1,5 +1,5 @@
 import json
-
+import logging
 from train.repositories.evaluator_repository import Evaluator
 from train.build_dataset import BuildDataset
 from train.model import Model
@@ -19,7 +19,8 @@ class MLPipeline():
 
     def run(self, data_path):
 
-        X_train, X_test, y_train, y_test = BuildDataset.split_data(data_path)
+        buid_dataset = BuildDataset()
+        X_train, X_test, y_train, y_test = buid_dataset.split_data(data_path)
 
         with mlflow.start_run(run_name="lgbm_model"):
             
@@ -42,9 +43,9 @@ class MLPipeline():
         mlflow.end_run()
 
     def create_pickle_config(self, experiment_id, best_run_id):
-
-        pickle_config = {"experiment_id":experiment_id,"run_id":best_run_id, "path":'model/model.pkl'}
-        with open('./src/pickle_config.json', 'w') as f:
-            json.dump(pickle_config, f, ensure_ascii=False, indent=4)
-
+  
+        if experiment_id != "" and best_run_id != "":
+            pickle_config = {"experiment_id":experiment_id,"run_id":best_run_id, "path":'model/model.pkl'}
+            with open('./src/pickle_config.json', 'w') as f:
+                json.dump(pickle_config, f, ensure_ascii=False, indent=4)
         return pickle_config
