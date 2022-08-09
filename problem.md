@@ -17,31 +17,31 @@ https://www.kaggle.com/c/santander-customer-transaction-prediction:
 problem: customers will make a specific transaction in the future
  * classification binary
 
- Eu escolhi o desafio Santander Customer Transaction Prediction. Alem de ser uma problema simples de classificação binaria, achei os dados um poucos diferente do que eu geralemnte trabalho, e como o objetivo principal deste teste não está relacionado com a modelagem do modelo, vou usar esse desafio para aprender. 
+I chose the **Santander Customer Transaction Prediction** challenge. Besides being a binary classification problem, I found the data a little different from what I usually work with, and as the main objective of this test is not related to model modeling, I will use this challenge to learn project structuring.
 
 ## Database
 
-o objetivo é classificar os clientes
+The problem call asks the following question: "Can you identify who will make a transaction?". The contextualization of the problem informs that the objective is to identify which customers will make a transaction.
+This is a sentiment analysis problem. The provided data has a label, identified by the target column, which has a binary value (0 or 1) and must be the column used for inference.
 
-Variáveis de Input:
+Input data:
  * 200 raw features without description
 
-Variáveis de Output:
+Output data:
  * binary target column, 0 or 1.
 
-## Solução
+## Solution
 
-Ter um modelo de dirá quais clientes que iram transacionar no futuro.
+Having a model will analyze customer sentiments and tell you which customers will transact in the future.
 
-## Como?
+## How?
 
-Já que tratamos de uma classificação binaria, vou implementar uma árvore de decisão com a biblioteca XGBoost.
-Realizar uma análise exploratória dos dados para verificar se há alguma anomalia nos dados.
-E construir algumas features aplicando alguma tecnica que faz sentido para o modelo.
+Since we are dealing with a binary classification, I will implement a decision tree with the LightGBM library, as an initial model to analyze the data.
+And build some features by applying some technique that makes sense for this problem.
 
-O resultado final será pesquisa se sobre um cliente falando se ele será um cliente que fará transaçoes no futuro
+The end result will be a survey if a customer will make transactions in the future
 
-# Metrica 
+# Metrics 
 
 Métrica primaria: Quantos clientes acertou nos dados de teste.
 
