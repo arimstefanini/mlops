@@ -15,7 +15,7 @@ This project is about a struct apply ML to build a production grade product to d
 
 > **_NOTE:_** You can find a little more about the problem developed in this [link](https://github.com/arimstefanini/serasa-challenge/blob/develop/problem.md)
 
-COLOCAR UM DIAGRAMA
+![Diagram C4](https://github.com/arimstefanini/serasa-challenge/blob/develop/diagram.png)
 
 This code was implemented using  [MLflow](https://mlflow.org/) to manage the ML lifecycle.
 To meet MLOps practices, the system was developed with [Argo Workflow](https://argoproj.github.io/argo-workflows/) which helps to generate an instant predict of the lgbm model for identify who make a transaction.
