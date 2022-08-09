@@ -1,6 +1,6 @@
 FROM python:3.8-slim
 
-WORKDIR /santander_chalenge
+WORKDIR /santander_challenge
 
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get -y install curl
@@ -10,5 +10,5 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt 
 RUN rm requirements.txt
 
-COPY /data /santander_chalenge/data 
-COPY /src  /santander_chalenge/src
+COPY /data /santander_challenge/data 
+COPY /src  /santander_challenge/src

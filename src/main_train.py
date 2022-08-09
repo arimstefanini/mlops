@@ -11,7 +11,7 @@ load_dotenv()
 def get_args():
     parser = argparse.ArgumentParser()
     
-    parser.add_argument('-d', '--data_file', help='path train dataset', required=True)
+    parser.add_argument('-t', '--train_file', help='path train dataset', required=True)
 
     return parser.parse_args()
 
@@ -22,26 +22,34 @@ if __name__ == "__main__":
     """
     exemple exec:
         python src/main_train.py \
-            -d /data/train_data/train.csv 
+            -t data/train_data/train.csv 
     """
 
     try:
 
         if os.getenv('ENV_LOCAL') == 'local':
-            data_file = os.environ['data_file']
+            train_file = os.environ['TRAIN_FILE']
 
         else:
             args = get_args()
 
-            data_file = args.data_file
+            train_file = args.train_file
 
         cwd = os.getcwd()
 
-        data_path = f'{cwd}\{data_file}'
+        data_path = f'{cwd}/{train_file}'
+
+        ##
+        # ML PIPELINE
+        ##
+
+        logging.debug("Start ml pipeline")
 
         evaluator = LGBMEvaluator()
         ml_pipeline = MLPipeline(evaluator)
         ml_pipeline.run(data_path)
+
+        logging.debug("Finish ml pipeline")
 
     except Exception as e:
         logging.error("Exception occurred", exc_info=True)

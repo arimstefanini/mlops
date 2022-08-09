@@ -8,7 +8,7 @@ from train.evaluation import Evaluation
 import mlflow
 from mlflow.models.signature import infer_signature
 
-experiment_name = 'santander_chalenge'
+experiment_name = 'santander_challenge'
 mlflow.set_experiment(experiment_name)
 mlflow.lightgbm.autolog()
 
