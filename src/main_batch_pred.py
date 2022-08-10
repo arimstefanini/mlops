@@ -3,7 +3,7 @@ import json
 import argparse
 from dotenv import load_dotenv
 import logging
-from multiprocessing import Process
+import multiprocessing
 
 from predict.predict_pipeline import PredictPipeline
 
@@ -54,12 +54,13 @@ if __name__ == "__main__":
 
         predict_pipeline = PredictPipeline()
 
+        pool = multiprocessing.Pool(processes=3)
         for data in data_files:
             output = f'{cwd}/data/submission_data/submission_{data}.csv'
-            proc = Process(target=predict_pipeline.run, args=(config, f'{cwd}/data/test_data/{data}.csv', sample_submission, output,))
-            procs.append(proc)
-            proc.start()
+            pool.apply_async(predict_pipeline.run, args=(config, f'{cwd}/data/test_data/{data}.csv', sample_submission, output,))
 
+        pool.close()
+        pool.join()
         logging.debug("Finish predict pipeline in bach")
 
     except Exception as e:

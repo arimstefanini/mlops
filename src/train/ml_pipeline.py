@@ -27,15 +27,15 @@ class MLPipeline():
             model = self.evaluator.evaluate()
             Model.fit_model(model, X_train, y_train)
 
-            y_pred, acc = Evaluation.get_evaluation(model, X_test, y_test)
+            y_pred, auc = Evaluation.get_evaluation(model, X_test, y_test)
 
-            mlflow.log_metric("accuracy", acc)
+            mlflow.log_metric("auc", auc)
             signature = infer_signature(X_train, y_pred)
             mlflow.lightgbm.log_model(model, "model", signature=signature)
 
             current_experiment=dict(mlflow.get_experiment_by_name(experiment_name))
             experiment_id = current_experiment['experiment_id']
-            df = mlflow.search_runs([experiment_id], order_by=["metrics.accuracy DESC"])
+            df = mlflow.search_runs([experiment_id], order_by=["metrics.auc DESC"])
             best_run_id = df.loc[0,'run_id']
 
             self.create_pickle_config(experiment_id, best_run_id)

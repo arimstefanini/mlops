@@ -1,8 +1,8 @@
 # Serasa Challenge - MLOps project
-This project is about a struct apply ML to build a production grade product to deliver value with good practices of MLOps
+This repository aims to solve the use case, Santander Customer Transaction Prediction, and deployment using MLOps practices.
 
 # Table of contents
-* [Overview](#overview)
+* [Composition](#composition)
 * [Getting Started](#getting-started)
   + [Installation](#installation)
   + [Docker](#docker)
@@ -12,21 +12,17 @@ This project is about a struct apply ML to build a production grade product to d
     + [Warning](#warning)
 * [Argo Workflow](#instant-prediction)
 
-# Overview
+> **_NOTE:_** You can find a problem description of the use case developed in this [link](https://github.com/arimstefanini/serasa-challenge/blob/develop/problem.md)
 
-> **_NOTE:_** You can find a little more about the problem developed in this [link](https://github.com/arimstefanini/serasa-challenge/blob/develop/problem.md)
+# Composition
 
-![Diagram C4](https://github.com/arimstefanini/serasa-challenge/blob/develop/diagram.png)
+The repository consists of:
+   * Train. It fit and saves a model on MLflows.
+   * Predict. It runs predicts outcomes using the model.
+   * Batch predict. It runs batch predicts.
+   * Test. It runs continuous testing.
 
-This code was implemented using  [MLflow](https://mlflow.org/) to manage the ML lifecycle.
-To meet MLOps practices, the system was developed with [Argo Workflow](https://argoproj.github.io/argo-workflows/) which helps to generate an instant predict of the lgbm model for identify who make a transaction.
-
-# Getting Started
-I focus on the fundamentals and then dive into the code, at which point we can refer to this repository as a guide. 
-## Installation Dependences
-Dependencies can be installed using this command
-
-`pip install -r requirements.txt`
+This program use  [MLflow](https://mlflow.org/) to manage the ML lifecycle, which helps to generate an instant prediction of the LightGBM model for identifying the target.
 
 ### Directory
 ```
@@ -41,7 +37,19 @@ serasa-challenge/
      |-- test_simple.py            - test unit with pytest
 ```
 
-## Docker
+# Getting Started
+Adopting MLOps practices provides automatization of all the steps in the ML, and with this, we have a faster delivery. And for that, I implemented some technologies to put MLOps into practice.
+ 
+## Software build
+
+## Automate Testing and Deployment
+deploying to [Heroku](https://devcenter.heroku.com/articles/heroku-cli) from [GitHub Acrions](https://github.com/features/actions) 
+### Dependencies
+Dependencies can be installed using this command
+
+`pip install -r requirements.txt`
+
+## Docker 
 Command to build and run a docker image
 
 `docker build -t santander-chalange:latest .`
@@ -55,8 +63,8 @@ or
 
 # Workflow
 This program has two options for execution, either by .env or by command line passing the parameters by args
-## .env file exec
-> **_NOTE:_** The file `main_train.py` returns `pickle_config.json`
+### .env file exec
+> **_NOTE:_** The program `main_train.py` returns `pickle_config.json`
 
 `python src/main_train.py`
 
@@ -83,7 +91,7 @@ OUTPUT=data/submission_data/submission.csv
 DATA_FILES=test,test_copy,test_copy2
 ```
 
-## command line exec
+### command line exec
 ```bash
 python src/main_train.py \
     -t [path train dataset]
@@ -93,7 +101,7 @@ python src/main_predict.py \
     -d [path test dataset] \
     -p [data mlflow model] \
     -s [folder path data sample submission] \
-    -s [folder path output] \
+    -o [folder path output] \
 ```
 or
 ```bash
@@ -112,9 +120,6 @@ Here is an example file.
     "path": [path model.pkl]
 }
 ```
-
-## Auto Test
-para o TC estou utilizado o [Heroku](https://devcenter.heroku.com/articles/heroku-cli) junto ao [GitHub Acrions]() 
 
 ## Argo Workflow - Instant Prediction
 

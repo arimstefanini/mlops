@@ -28,7 +28,7 @@ if __name__ == "__main__":
             -d data/test_data/test.csv \
             -p src/pickle_config.json \
             -s data/submission_data/sample_submission.csv \
-            -s data/submission_data/submission.csv \
+            -o data/submission_data/submission.csv \
     """
     
     try:

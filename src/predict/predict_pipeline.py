@@ -1,6 +1,6 @@
 import pickle
 import pandas as pd
-
+import numpy as np
 from mlflow.tracking import MlflowClient
 
 class PredictPipeline:
@@ -17,15 +17,17 @@ class PredictPipeline:
 
         test =  pd.read_csv(data_path)
         test = test.drop(columns=['ID_code'])
-        predict_santander = model.predict(test)
+        
+        proba_y = model.predict_proba(test)
 
-        self.create_submission(predict_santander, submission_path, output)
+        self.create_submission(proba_y, submission_path, output)
 
-    def create_submission(self, predict_santander, submission_path, output):
+    def create_submission(self, proba_y, submission_path, output):
 
         sample_submission =  pd.read_csv(submission_path)
-        sample_submission = pd.DataFrame(sample_submission)
+
+        y_pred = [ np.where(proba > 0.5)[0][0]  for proba in proba_y ]
         
-        my_submission = pd.DataFrame({'ID_code': sample_submission.ID_code, 'target': predict_santander})
+        my_submission = pd.DataFrame({'ID_code': sample_submission.ID_code, 'target': y_pred})
         my_submission.to_csv(output, index=False)
 
