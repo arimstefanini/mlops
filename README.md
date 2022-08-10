@@ -113,6 +113,9 @@ Here is an example file.
 }
 ```
 
+## Auto Test
+para o TC estou utilizado o [Heroku](https://devcenter.heroku.com/articles/heroku-cli) junto ao [GitHub Acrions]() 
+
 ## Argo Workflow - Instant Prediction
 
 para instalar o argo workflow voce pode seguir os seguintes passos
