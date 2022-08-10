@@ -3,14 +3,14 @@ This repository aims to solve the use case, Santander Customer Transaction Predi
 
 # Table of contents
 * [Composition](#composition)
+    + [Directory](#directory)
 * [Getting Started](#getting-started)
-  + [Installation](#installation)
+  + [Software build](#software-build)
+  + [Dependencies](#dependencies)
   + [Docker](#docker)
-* [Exectution the Project](#exectution-the-project)
-  + [Env file exec](#env-file-exec)
-  + [Args exec](#args-exec)
-    + [Warning](#warning)
-* [Argo Workflow](#instant-prediction)
+  + [Local exec](#local-exec)
+    + [.env file exec](#env-file-exec)
+    + [command line exec](#command-line-exec)
 
 > **_NOTE:_** You can find a problem description of the use case developed in this [link](https://github.com/arimstefanini/serasa-challenge/blob/develop/problem.md)
 
@@ -24,7 +24,7 @@ The repository consists of:
 
 This program use  [MLflow](https://mlflow.org/) to manage the ML lifecycle, which helps to generate an instant prediction of the LightGBM model for identifying the target.
 
-### Directory
+## Directory
 ```
 serasa-challenge/
 |-- src/
@@ -40,11 +40,10 @@ serasa-challenge/
 # Getting Started
 Adopting MLOps practices provides automatization of all the steps in the ML, and with this, we have a faster delivery. And for that, I implemented some technologies to put MLOps into practice.
  
-## Software build
+Deploying to [Heroku](https://devcenter.heroku.com/articles/heroku-cli) from [GitHub Acrions](https://github.com/features/actions) 
 
-## Automate Testing and Deployment
-deploying to [Heroku](https://devcenter.heroku.com/articles/heroku-cli) from [GitHub Acrions](https://github.com/features/actions) 
-### Dependencies
+# Software build
+## Dependencies
 Dependencies can be installed using this command
 
 `pip install -r requirements.txt`
@@ -61,9 +60,11 @@ or
 `docker run -it --env-file .env santander-chalange /bin/sh`
 
 
-# Workflow
+## Local exec
 This program has two options for execution, either by .env or by command line passing the parameters by args
+
 ### .env file exec
+
 > **_NOTE:_** The program `main_train.py` returns `pickle_config.json`
 
 `python src/main_train.py`
@@ -120,18 +121,3 @@ Here is an example file.
     "path": [path model.pkl]
 }
 ```
-
-## Argo Workflow - Instant Prediction
-
-para instalar o argo workflow voce pode seguir os seguintes passos
-```
-kubectl create namespace argo
-
-kubectl apply -n argo -f https://github.com/argoproj/argo-workflows/releases/download/v3.1.5/install.yaml
-```
-submit config file
-```
-argo submit -n argo --watch workflow.yaml
-```
-
-se tiver algum problema com a execução do argo workflow este [link](https://www.eksworkshop.com/advanced/410_batch/install/) pode te ajudar
