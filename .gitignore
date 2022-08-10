@@ -1,0 +1,8 @@
+__pycache__
+.pytest_cache
+
+mlruns
+
+.env
+data
+src/pickle_config.json
