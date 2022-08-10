@@ -10,6 +10,7 @@ This project is about a struct apply ML to build a production grade product to d
   + [Env file exec](#env-file-exec)
   + [Args exec](#args-exec)
     + [Warning](#warning)
+* [Argo Workflow](#instant-prediction)
 
 # Overview
 
@@ -111,3 +112,18 @@ Here is an example file.
     "path": [path model.pkl]
 }
 ```
+
+## Argo Workflow - Instant Prediction
+
+para instalar o argo workflow voce pode seguir os seguintes passos
+```
+kubectl create namespace argo
+
+kubectl apply -n argo -f https://github.com/argoproj/argo-workflows/releases/download/v3.1.5/install.yaml
+```
+submit config file
+```
+argo submit -n argo --watch workflow.yaml
+```
+
+se tiver algum problema com a execução do argo workflow este [link](https://www.eksworkshop.com/advanced/410_batch/install/) pode te ajudar
