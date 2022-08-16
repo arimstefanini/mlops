@@ -1,4 +1,4 @@
-# Serasa Challenge - MLOps project
+# MLOps project
 This repository aims to solve the use case, Santander Customer Transaction Prediction, and deployment using MLOps practices.
 
 # Table of contents
